@@ -1,0 +1,15 @@
+{
+    "sounds":
+    [
+        {
+            "id": 1,
+            "title": "Pingas!",
+            "file": pingas
+        },
+        {
+            "id": 2,
+            "title": "Oooof",
+            "file": roblox
+        }
+    ]
+}
