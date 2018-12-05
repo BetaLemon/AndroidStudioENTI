@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">SocialWall</string>
+
+    <string name="tab_board">Board</string>
+    <string name="tab_news">News</string>
+    <string name="tab_profile">Profile</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="add_message_success">Message added successfully!</string>
+    <string name="add_message_error">Error sending message :(</string>
+
+    <string name="register_goto_login">Already have an account? <u>Login here</u></string>
+</resources>
