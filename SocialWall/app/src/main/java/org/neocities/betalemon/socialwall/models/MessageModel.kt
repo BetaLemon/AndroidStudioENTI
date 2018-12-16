@@ -9,3 +9,7 @@ data class MessageModel(
     var likes: Int? = null,
     var userId: Int? = null
 )
+
+data class MessageList(
+    var messages: ArrayList<MessageModel>?
+)
