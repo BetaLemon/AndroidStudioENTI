@@ -22,6 +22,8 @@ import org.neocities.betalemon.socialwall.activities.SignUpActivity
 import org.neocities.betalemon.socialwall.adapters.MessageAdapter
 import org.neocities.betalemon.socialwall.models.MessageList
 import org.neocities.betalemon.socialwall.models.MessageModel
+import java.sql.Timestamp
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -41,6 +43,10 @@ class BoardFragment : Fragment() {
         messageCollection.get()
                 .addOnSuccessListener {messages->
                     for(message in messages){
+                        Toast.makeText(activity, "Patata.", Toast.LENGTH_SHORT).show()
+                        //val date = message[MSG_DATE] as Date
+                        //Toast.makeText(activity, date.toString(), Toast.LENGTH_SHORT).show()
+
                         messageArray.add(MessageModel(username = message[MSG_USERNAME].toString(),
                                 text = message[MSG_TEXT].toString()))
                     }
@@ -72,7 +78,7 @@ class BoardFragment : Fragment() {
             // Send message to database
 
             val userPreferences = context?.getSharedPreferences(USER_PREFS, Context.MODE_PRIVATE)
-            val userId = userPreferences?.getString(PREF_USERID, "")?.toInt()
+            val userId = userPreferences?.getString(PREF_USERID, "")?.toString()
             val username = userPreferences?.getString(PREF_USERNAME, "")
 
             val message = MessageModel(text = messageText, createdAt = Date(), username = username, userId = userId)

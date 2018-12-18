@@ -7,7 +7,7 @@ data class MessageModel(
     var text: String? = null,
     var createdAt: Date? = null,
     var likes: Int? = null,
-    var userId: Int? = null
+    var userId: String? = null
 )
 
 data class MessageList(
