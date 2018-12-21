@@ -30,6 +30,25 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?){
         super.onViewCreated(view, savedInstanceState)
 
+        loadProfileData()
+
+        logOutButton.setOnClickListener{
+            val editor = context?.getSharedPreferences(USER_PREFS, Context.MODE_PRIVATE)?.edit()
+            editor?.remove(PREF_USERID)
+            editor?.remove(PREF_USERNAME)
+            editor?.apply()
+
+            FirebaseAuth.getInstance().signOut()
+
+            val goToSignUpIntent = Intent(activity, SignUpActivity::class.java)
+            //goToSignUpIntent.putExtra() // podríem ficar info que es podría utilitzar més endavant
+            startActivity(goToSignUpIntent)
+            return@setOnClickListener
+        }
+
+    }
+
+    private fun loadProfileData(){
         val user = UserModel()
 
         val userPreferences = context?.getSharedPreferences(USER_PREFS, Context.MODE_PRIVATE)
@@ -40,7 +59,8 @@ class ProfileFragment : Fragment() {
             val goToSignUpIntent = Intent(activity, SignUpActivity::class.java)
             //goToSignUpIntent.putExtra() // podríem ficar info que es podría utilitzar més endavant
             startActivity(goToSignUpIntent)
-            return@onViewCreated
+            loadProfileData()
+            return
         }else{
             // If user is logged in:
             FirebaseFirestore.getInstance().collection(COLLECTION_USERS).whereEqualTo(USER_ID, userId).get()
@@ -75,21 +95,6 @@ class ProfileFragment : Fragment() {
                         }
                     }
         }
-
-        logOutButton.setOnClickListener{
-            val editor = context?.getSharedPreferences(USER_PREFS, Context.MODE_PRIVATE)?.edit()
-            editor?.remove(PREF_USERID)
-            editor?.remove(PREF_USERNAME)
-            editor?.apply()
-
-            FirebaseAuth.getInstance().signOut()
-
-            val goToSignUpIntent = Intent(activity, SignUpActivity::class.java)
-            //goToSignUpIntent.putExtra() // podríem ficar info que es podría utilitzar més endavant
-            startActivity(goToSignUpIntent)
-            return@setOnClickListener
-        }
-
     }
 
 }

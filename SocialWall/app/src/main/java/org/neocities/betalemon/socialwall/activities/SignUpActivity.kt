@@ -7,9 +7,11 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_sign_up.*
+import kotlinx.android.synthetic.main.fragment_board.*
 import org.neocities.betalemon.socialwall.*
 import org.neocities.betalemon.socialwall.models.UserModel
 
@@ -26,6 +28,10 @@ class SignUpActivity : AppCompatActivity() {
             val email = emailInput.text.toString()
             val password = passwordInput.text.toString()
             signUp_progressBar.visibility = View.VISIBLE
+
+            // Hide keyboard:
+            val mgr = thisView.context.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+            mgr?.hideSoftInputFromWindow(passwordInput.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
 
             // 2. Validate form data
             if(!username.isEmpty() && email.isNotEmpty() && password.isNotEmpty()) { // Per comprovar si el text és un mail, utilitzariem un regex.
@@ -59,7 +65,7 @@ class SignUpActivity : AppCompatActivity() {
                             // If sign in fails, display a message to the user.
                             signUp_progressBar.visibility = View.GONE
                             Log.w("SignUpActivity", "createUserWithEmail:failure", task.exception)
-                            Snackbar.make(thisView, R.string.register_error, Snackbar.LENGTH_SHORT).show()
+                            Snackbar.make(thisView, R.string.register_error, Snackbar.LENGTH_LONG).show()
                         }
 
 
@@ -76,6 +82,7 @@ class SignUpActivity : AppCompatActivity() {
             val goToLoginIntent = Intent(this, LogInActivity::class.java)
             //goToSignUpIntent.putExtra() // podríem ficar info que es podría utilitzar més endavant
             startActivity(goToLoginIntent)
+            finish()
             return@setOnClickListener
         }
     }

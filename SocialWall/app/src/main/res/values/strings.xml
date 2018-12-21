@@ -14,6 +14,7 @@
     <!-- Board Fragment -->
     <string name="add_message_success">Message added successfully!</string>
     <string name="add_message_error">Error sending message :(</string>
+    <string name="add_message_notext">Please enter a message before sending.</string>
     <string name="message_username_placeholder">Username</string>
     <string name="message_text_placeholder">Here goes the message text.</string>
     <string name="message_date_placeholder">Monday 02/12/1996 11:30</string>
@@ -37,8 +38,7 @@
     <!-- SignUp Activity-->
     <string name="register_goto_login">Already have an account? <u>Login here</u></string>
     <string name="register_successful">Signed up successfully!</string>
-    <string name="register_error">Unable to create account.\nCheck that you entered a valid email address\n
-    and a long enough password.</string>
+    <string name="register_error">Couldn\'t sign up. Email and/or password invalid.</string>
     <string name="register_username_header">Username</string>
     <string name="register_email_header">Email</string>
     <string name="register_password_header">Password</string>
@@ -51,7 +51,7 @@
     <!-- Login Activity-->
     <string name="login_goto_register">Already have an account? <u>Login here</u></string>
     <string name="login_successful">Logged in successfully!</string>
-    <string name="login_wrong_credentials">Logged in successfully!</string>
+    <string name="login_wrong_credentials">Couldn\'t log you in. Wrong credentials.</string>
     <string name="login_email_header">Email</string>
     <string name="login_password_header">Password</string>
     <string name="login_email_textFieldHint">Enter your email address</string>
