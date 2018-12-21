@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="margin">16dp</dimen>
+    <!-- Generic dimensions -->
+    <dimen name="margin_medium">16dp</dimen>
+
+    <dimen name="text_medium">16sp</dimen>
+    <dimen name="text_date">12sp</dimen>
+
+    <!-- Login -->
+    <dimen name="login_marginTop">16dp</dimen>
+
+    <!-- Register -->
+    <dimen name="register_marginTop">16dp</dimen>
+    <dimen name="progressbar_size">32dp</dimen>
+
+    <!-- Board -->
+    <dimen name="message_margin">5dp</dimen>
+    <dimen name="message_avatarMarginRight">10dp</dimen>
+    <dimen name="message_avatarSize">45dp</dimen>
+    <dimen name="elevation_sendMessageBar">20dp</dimen>
+
+    <!-- News -->
+    <dimen name="news_margin">5dp</dimen>
+    <dimen name="news_content_margin">10dp</dimen>
+    <dimen name="news_image_margin">10dp</dimen>
+
+    <!-- Profile -->
+    <dimen name="profile_avatarSize">240dp</dimen>
+    <dimen name="profile_avatarMarginBottom">20dp</dimen>
+    <dimen name="profile_usernameTextSize">20sp</dimen>
+    <dimen name="profile_emailTextSize">17sp</dimen>
+    <dimen name="profile_logoutButton_marginTop">20dp</dimen>
+    <dimen name="profile_logoutButton_cornerRadius">10dp</dimen>
 
 </resources>

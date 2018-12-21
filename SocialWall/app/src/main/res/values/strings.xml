@@ -14,18 +14,48 @@
     <!-- Board Fragment -->
     <string name="add_message_success">Message added successfully!</string>
     <string name="add_message_error">Error sending message :(</string>
+    <string name="message_username_placeholder">Username</string>
+    <string name="message_text_placeholder">Here goes the message text.</string>
+    <string name="message_date_placeholder">Monday 02/12/1996 11:30</string>
+    <string name="board_send_button">Send</string>
+
 
     <!-- News Fragment -->
     <string name="news_refresh_error">Error: Could not retrieve message list.</string>
+    <string name="news_title_placeholder">Here goes the news title.</string>
+    <string name="news_author_placeholder">Author</string>
+    <string name="news_description_placeholder">News description.</string>
+    <string name="news_date_placeholder">Monday 02/12/1996 11:30</string>
+
+
+    <!-- Profile Fragment -->
+    <string name="profile_get_error">Error: Could not retrieve profile data.</string>
+    <string name="profile_username_placeholder">Username</string>
+    <string name="profile_email_placeholder">example@email.com</string>
+    <string name="profile_logout_button">Log Out</string>
 
     <!-- SignUp Activity-->
     <string name="register_goto_login">Already have an account? <u>Login here</u></string>
     <string name="register_successful">Signed up successfully!</string>
     <string name="register_error">Unable to create account.\nCheck that you entered a valid email address\n
     and a long enough password.</string>
+    <string name="register_username_header">Username</string>
+    <string name="register_email_header">Email</string>
+    <string name="register_password_header">Password</string>
+    <string name="register_username_textFieldHint">Choose your username</string>
+    <string name="register_email_textFieldHint">Your email address</string>
+    <string name="register_password_textFieldHint">Insert your new password</string>
+    <string name="register_button_text">Sign Up</string>
+
 
     <!-- Login Activity-->
     <string name="login_goto_register">Already have an account? <u>Login here</u></string>
     <string name="login_successful">Logged in successfully!</string>
     <string name="login_wrong_credentials">Logged in successfully!</string>
+    <string name="login_email_header">Email</string>
+    <string name="login_password_header">Password</string>
+    <string name="login_email_textFieldHint">Enter your email address</string>
+    <string name="login_password_textFieldHint">Enter your password</string>
+    <string name="login_button_text">Log In</string>
+
 </resources>

@@ -1,71 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center"
-        tools:context=".activities.SignUpActivity">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".activities.SignUpActivity">
 
     <!-- Username -->
-    <TextView android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:textSize="16sp"
-              android:textStyle="bold"
-              android:text="Username"/>
-    <EditText android:id="@+id/usernameInput"
-            android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:hint="Choose your username"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/register_username_header"
+        android:textSize="@dimen/text_medium"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/usernameInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/register_username_textFieldHint" />
 
     <!-- Email -->
-    <TextView android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:textSize="16sp"
-              android:textStyle="bold"
-              android:text="Email"/>
-    <EditText android:id="@+id/emailInput"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:inputType="textEmailAddress"
-              android:hint="Your email address"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/register_email_header"
+        android:textSize="@dimen/text_medium"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/emailInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/register_email_textFieldHint"
+        android:inputType="textEmailAddress" />
 
     <!-- Password -->
-    <TextView android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:textSize="16sp"
-              android:textStyle="bold"
-              android:text="Password"/>
-    <EditText android:id="@+id/passwordInput"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:inputType="textPassword"
-              android:hint="Insert your new password"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/register_password_header"
+        android:textSize="@dimen/text_medium"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/passwordInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/register_password_textFieldHint"
+        android:inputType="textPassword" />
 
     <!-- Submit -->
-    <Button
-            android:id="@+id/submitButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorAccent"
-            android:layout_marginTop="@dimen/margin"
-            android:text="Sign Up"
-            />
+    <android.support.design.button.MaterialButton
+        android:id="@+id/submitButton"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_medium"
+        android:backgroundTint="@color/colorAccent"
+        android:text="@string/register_button_text" />
 
     <ProgressBar
         android:id="@+id/signUp_progressBar"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="16dp"
-        android:visibility="gone"/>
+        android:layout_width="@dimen/progressbar_size"
+        android:layout_height="@dimen/progressbar_size"
+        android:layout_marginTop="@dimen/register_marginTop"
+        android:visibility="gone" />
 
     <!-- Go To Login -->
     <TextView
-            android:id="@+id/goToLogin"
-            android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_marginTop="@dimen/margin"
-              android:text="@string/register_goto_login"/>
+        android:id="@+id/goToLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/register_marginTop"
+        android:text="@string/register_goto_login" />
 
 </LinearLayout>

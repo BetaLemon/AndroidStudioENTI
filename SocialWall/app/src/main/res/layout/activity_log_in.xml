@@ -11,26 +11,26 @@
     <!-- Email -->
     <TextView android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
+        android:textSize="@dimen/text_medium"
         android:textStyle="bold"
-        android:text="Email"/>
+        android:text="@string/login_email_header"/>
 
     <EditText android:id="@+id/loginEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Enter your email address"/>
+        android:hint="@string/login_email_textFieldHint"/>
 
     <!-- Password -->
     <TextView android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
+        android:textSize="@dimen/text_medium"
         android:textStyle="bold"
-        android:text="Password"/>
+        android:text="@string/login_password_header"/>
     <EditText android:id="@+id/loginPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
-        android:hint="Enter your password"/>
+        android:hint="@string/login_password_textFieldHint"/>
 
     <!-- Submit -->
     <android.support.design.button.MaterialButton
@@ -38,16 +38,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/colorAccent"
-        android:layout_marginTop="@dimen/margin"
+        android:layout_marginTop="@dimen/margin_medium"
         style="@style/Widget.AppCompat.Button.Colored"
-        android:text="Log In"
+        android:text="@string/login_button_text"
         />
 
     <ProgressBar
         android:id="@+id/login_progressBar"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="@dimen/progressbar_size"
+        android:layout_height="@dimen/progressbar_size"
+        android:layout_marginTop="@dimen/margin_medium"
         android:visibility="gone"/>
 
     <!-- Go To Login -->
@@ -55,7 +55,7 @@
         android:id="@+id/goToSignUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin"
+        android:layout_marginTop="@dimen/margin_medium"
         android:text="@string/login_goto_register"/>
 
 </LinearLayout>

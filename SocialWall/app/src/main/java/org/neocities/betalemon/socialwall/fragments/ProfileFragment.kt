@@ -11,18 +11,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
-import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 import org.neocities.betalemon.socialwall.*
 import org.neocities.betalemon.socialwall.activities.SignUpActivity
-import org.neocities.betalemon.socialwall.models.NewsModel
 import org.neocities.betalemon.socialwall.models.UserModel
 
 class ProfileFragment : Fragment() {
@@ -51,14 +46,14 @@ class ProfileFragment : Fragment() {
             FirebaseFirestore.getInstance().collection(COLLECTION_USERS).whereEqualTo(USER_ID, userId).get()
                     .addOnSuccessListener {
                         if(!it.isEmpty){
-                            var u = it.documents[0]
+                            val u = it.documents[0]
                             user.avatarUrl = u[USER_AVATAR].toString()
                             user.email = u[USER_MAIL].toString()
                             user.username = u[USER_NAME].toString()
-                            user.userId = userId;
+                            user.userId = userId
 
-                            profileUsername.text = user.username;
-                            profileEmail.text = user.email;
+                            profileUsername.text = user.username
+                            profileEmail.text = user.email
                             if(user.avatarUrl != "" && user.avatarUrl != null) {
 
                                 Glide.with(this)
@@ -68,7 +63,7 @@ class ProfileFragment : Fragment() {
                                                         .transforms(CircleCrop())
                                                         .placeholder(R.drawable.ic_profile)
                                         )
-                                        .into(profileAvatar);
+                                        .into(profileAvatar)
 
                                 //profileAvatar.src = user.avatarUrl;
 
