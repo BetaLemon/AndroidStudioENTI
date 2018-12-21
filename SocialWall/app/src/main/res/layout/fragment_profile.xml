@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context=".fragments.BoardFragment">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.BoardFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:gravity="center">
 
         <ImageView
             android:id="@+id/profileAvatar"
-            android:src="@drawable/ic_board"
-            android:layout_marginTop="40dp"
+            android:src="@drawable/ic_profile"
             android:layout_centerHorizontal="true"
             android:layout_width="240dp"
-            android:layout_height="240dp" />
+            android:layout_height="240dp"
+            android:layout_marginBottom="20dp"/>
 
         <TextView
             android:id="@+id/profileUsername"
-            android:text="My nombre de usuario :)"
+            android:text="Username"
             android:textSize="20dp"
             android:textStyle="bold"
             android:layout_below="@id/profileAvatar"
@@ -29,12 +31,25 @@
 
         <TextView
             android:id="@+id/profileEmail"
-            android:text="itsmylife@anditsnowornever.com"
+            android:text="example@email.com"
             android:textSize="17dp"
             android:layout_below="@id/profileUsername"
             android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
+        <android.support.design.button.MaterialButton
+            android:id="@+id/logOutButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/profileEmail"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/colorPrimaryDark"
+            app:cornerRadius="10dp"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:text="@string/profile_logout_button"/>
 
     </RelativeLayout>
 

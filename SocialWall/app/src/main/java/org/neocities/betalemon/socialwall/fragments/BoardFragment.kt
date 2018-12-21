@@ -4,28 +4,25 @@ package org.neocities.betalemon.socialwall.fragments
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.Message
-import android.support.design.R.id.message
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.fragment_board.*
 import org.neocities.betalemon.socialwall.*
 import org.neocities.betalemon.socialwall.activities.SignUpActivity
 import org.neocities.betalemon.socialwall.adapters.MessageAdapter
-import org.neocities.betalemon.socialwall.models.MessageList
 import org.neocities.betalemon.socialwall.models.MessageModel
-import java.sql.Timestamp
-import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
+import android.view.inputmethod.InputMethodManager
+
 
 class BoardFragment : Fragment() {
 
@@ -37,38 +34,24 @@ class BoardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val messageArray = ArrayList<MessageModel>()
+        refreshData()
 
-        val messageCollection = FirebaseFirestore.getInstance().collection(COLLECTION_MESSAGES)
-        messageCollection.get()
-                .addOnSuccessListener {messages->
-                    for(message in messages){
-                        Toast.makeText(activity, "Patata.", Toast.LENGTH_SHORT).show()
-                        //val date = message[MSG_DATE] as Date
-                        //Toast.makeText(activity, date.toString(), Toast.LENGTH_SHORT).show()
-
-                        messageArray.add(MessageModel(username = message[MSG_USERNAME].toString(),
-                                text = message[MSG_TEXT].toString()))
-                    }
-                }
-        val messageList = MessageList(messageArray)
-
-        messageList.messages?.let {
-            // Set Layout Manager
-            boardRecyclerView.layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)
-            // Create Adapter
-            var adapter = MessageAdapter(it)
-            // Assign Adapter
-            boardRecyclerView.adapter = adapter
-
+        boardRefreshSwipe.setOnRefreshListener{
+            refreshData()
         }
 
-        sendButton.setOnClickListener{
+        sendButton.setOnClickListener{v->
             val messageText = inputText.text.toString()
-            if(messageText.isEmpty()) return@setOnClickListener
+            if(messageText.isEmpty()){
+                Snackbar.make(v, R.string.add_message_notext, Snackbar.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            var userPreferences = context?.getSharedPreferences(USER_PREFS, Context.MODE_PRIVATE)
+            var userId = userPreferences?.getString(PREF_USERID, "")?.toString()
 
             // If userkey == null -> SignUp
-            if(FirebaseAuth.getInstance().currentUser == null) {
+            if(userId == null || userId == "") {
                 val goToSignUpIntent = Intent(activity, SignUpActivity::class.java)
                 //goToSignUpIntent.putExtra() // podríem ficar info que es podría utilitzar més endavant
                 startActivity(goToSignUpIntent)
@@ -77,41 +60,60 @@ class BoardFragment : Fragment() {
 
             // Send message to database
 
-            val userPreferences = context?.getSharedPreferences(USER_PREFS, Context.MODE_PRIVATE)
-            val userId = userPreferences?.getString(PREF_USERID, "")?.toString()
-            val username = userPreferences?.getString(PREF_USERNAME, "")
+            userPreferences = context?.getSharedPreferences(USER_PREFS, Context.MODE_PRIVATE)
+            userId = userPreferences?.getString(PREF_USERID, "")?.toString()
+            val username = userPreferences?.getString(PREF_USERNAME, "")?.toString()
 
             val message = MessageModel(text = messageText, createdAt = Date(), username = username, userId = userId)
             val db = FirebaseFirestore.getInstance()
             db.collection(COLLECTION_MESSAGES)
                 .add(message)
-                .addOnSuccessListener { documentReference ->
-                    Toast.makeText(activity, R.string.add_message_success, Toast.LENGTH_SHORT).show()
+                .addOnSuccessListener {
+                    // Clear the text input field:
+                    inputText.text.clear()
+                    // Hide the keyboard:
+                    val mgr = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+                    mgr?.hideSoftInputFromWindow(inputText.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+                    // Update message list:
+                    refreshData()
+                    // Notify the user:
+                    Snackbar.make(v, R.string.add_message_success, Snackbar.LENGTH_SHORT).show()
                 }
                 .addOnFailureListener{e->
-                    Toast.makeText(activity, getString(R.string.add_message_error), Toast.LENGTH_SHORT).show()
+                    Log.e("BoardFragment", e.message)
+                    Snackbar.make(v, R.string.add_message_error, Snackbar.LENGTH_SHORT).show()
                 }
         }
     }
 
-    fun refreshData(){
+    private fun refreshData(){
+
+        boardRefreshSwipe.isRefreshing = true
+
         val db = FirebaseFirestore.getInstance()
 
-        db.collection(COLLECTION_MESSAGES).get().addOnCompleteListener{ task->
-            if(!isAdded) return@addOnCompleteListener
+        db.collection(COLLECTION_MESSAGES).orderBy(MSG_DATE, Query.Direction.DESCENDING).get().addOnCompleteListener { task ->
+            if (!isAdded) return@addOnCompleteListener
 
-            if(task.isSuccessful){
-                var list = ArrayList<MessageModel>()
-                task.result?.forEach{documentSnapshot->
-                    var message = documentSnapshot.toObject(MessageModel::class.java)
+            if (task.isSuccessful) {
+                val list = ArrayList<MessageModel>()
+                task.result?.forEach { documentSnapshot ->
+                    val message = documentSnapshot.toObject(MessageModel::class.java)
                     list.add(message)
                     Log.i("BoardFragment", message.toString())
                 }
-            }
-            else{
+                // Set Layout Manager
+                boardRecyclerView.layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)
+                // Create Adapter
+                val adapter = MessageAdapter(list)
+                // Assign Adapter
+                boardRecyclerView.adapter = adapter
+            } else {
                 Log.e("BoardFragment", "Error getting messages: " + task.exception?.message)
                 Toast.makeText(context, "Error, sorry", Toast.LENGTH_SHORT).show()
             }
+
+            boardRefreshSwipe.isRefreshing = false
         }
     }
 

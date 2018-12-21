@@ -1,6 +1,5 @@
 package org.neocities.betalemon.socialwall.adapters
 
-import android.graphics.Bitmap
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -10,11 +9,10 @@ import android.widget.TextView
 import kotlinx.android.synthetic.main.news_message.view.*
 import org.neocities.betalemon.socialwall.R
 import org.neocities.betalemon.socialwall.models.NewsModel
-import android.graphics.BitmapFactory
+import com.bumptech.glide.Glide
 
 
-
-class NewsAdapter(var newsList: ArrayList<NewsModel>) : RecyclerView.Adapter<NewsAdapter.MessageViewHolder>() {
+class NewsAdapter(private var newsList: ArrayList<NewsModel>) : RecyclerView.Adapter<NewsAdapter.MessageViewHolder>() {
     override fun getItemCount(): Int {
         return newsList.count()
     }
@@ -26,9 +24,11 @@ class NewsAdapter(var newsList: ArrayList<NewsModel>) : RecyclerView.Adapter<New
 
     override fun onBindViewHolder(viewHolder: NewsAdapter.MessageViewHolder, position: Int) {
         viewHolder.newsTitle.text = newsList[position].title
-        val imageIn = java.net.URL(newsList[position].imageUrl).openStream()
-        val img = BitmapFactory.decodeStream(imageIn)
-        viewHolder.newsImage.setImageBitmap(img)
+
+        Glide.with(viewHolder.newsImage)
+                .load(newsList[position].imageUrl)
+                .into(viewHolder.newsImage)
+
         viewHolder.newsAuthor.text = newsList[position].author
         viewHolder.newsDescription.text = newsList[position].description
         viewHolder.newsSentTime.text = newsList[position].createdAt.toString()

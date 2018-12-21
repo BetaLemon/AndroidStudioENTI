@@ -17,7 +17,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         tabs.setOnNavigationItemSelectedListener {tab->
-            // TODO: Open screen
 
             lateinit var fragment: Fragment
             when(tab.itemId){

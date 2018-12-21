@@ -1,23 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="5dp"
-        android:layout_marginVertical="5dp">
+        android:layout_marginVertical="5dp"
+        app:cardCornerRadius="10dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="10dp">
 
+            <ImageView
+                android:id="@+id/messageAvatar"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="10dp" />
+
             <TextView
                 android:id="@+id/messageSenderContainer"
                 android:text="Yo mama said"
                 android:textStyle="bold"
+                android:layout_toRightOf="@id/messageAvatar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
@@ -25,14 +35,18 @@
                 android:id="@+id/messageTextContainer"
                 android:text="Here should the message text go."
                 android:layout_below="@id/messageSenderContainer"
+                android:layout_toRightOf="@id/messageAvatar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/messageSentTime"
                 android:text="10:00"
+                android:textSize="12sp"
                 android:layout_alignParentRight="true"
+                android:textAlignment="viewEnd"
                 android:layout_below="@id/messageTextContainer"
+                android:layout_toRightOf="@id/messageAvatar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
