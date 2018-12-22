@@ -7,6 +7,9 @@
     <dimen name="text_medium">16sp</dimen>
     <dimen name="text_date">12sp</dimen>
 
+    <dimen name="icon_tiny">24dp</dimen>
+    <dimen name="icon_medium">32dp</dimen>
+
     <!-- Login -->
     <dimen name="login_marginTop">16dp</dimen>
 

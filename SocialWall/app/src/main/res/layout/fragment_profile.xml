@@ -19,6 +19,17 @@
             android:layout_height="@dimen/profile_avatarSize"
             android:layout_marginBottom="@dimen/profile_avatarMarginBottom"/>
 
+        <ImageView
+            android:id="@+id/profileAvatarEdit"
+            android:src="@drawable/ic_edit_black_24dp"
+            android:layout_width="@dimen/icon_medium"
+            android:layout_height="@dimen/icon_medium"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_alignRight="@id/profileAvatar"
+            android:layout_alignBottom="@id/profileAvatar"/>
+
         <TextView
             android:id="@+id/profileUsername"
             android:text="@string/profile_username_placeholder"
